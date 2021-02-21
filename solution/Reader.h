@@ -2,11 +2,14 @@
 
 #include <vector>
 #include <string>
+#include <map>
 
 class Reader {
 public:
+    using StringTable = std::vector<std::vector<std::string>>;
 
-
+    static void readInputData(const std::string& folderName);
 private:
-    static std::vector<std::vector<std::string>> readFromCSV(const std::string& filename);
+    static std::map<std::string, StringTable> makeCSVMap(const std::string& folderName);
+    static StringTable readFromCSV(const std::string& filename);
 };

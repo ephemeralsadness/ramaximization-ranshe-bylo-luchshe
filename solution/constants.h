@@ -20,6 +20,19 @@ namespace constants {
             "starts"
     };
 
+    const std::vector<std::string> REST_CONSTANTS = {
+            "REST_YEAR",
+            "MIN_REST_SIZE",
+            "MIN_REST_LAG",
+            "TOTAL_RESTS",
+            "PRIOR_RESTS",
+            "NOPRIOR_RESTS",
+            "REST_HIGH",
+            "REST_LOW",
+            "N_MONTHS",
+            "N_QUALS"
+    };
+
     const std::string CSV = ".csv";
 
 }

@@ -6,6 +6,9 @@
 
 #include <string>
 
+
+// TODO сделать компаратор объектов Qual
+
 class Qual {
 public:
     std::string name;

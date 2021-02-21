@@ -8,8 +8,8 @@ class Reader {
 public:
     using StringTable = std::vector<std::vector<std::string>>;
 
-    void readInputData(const std::string& folderName);
+    static void readInputData(const std::string& folderName);
 private:
-    std::map<std::string, StringTable> makeCSVMap(const std::string& folderName);
+    static std::map<std::string, StringTable> makeCSVMap(const std::string& folderName);
     static StringTable readFromCSV(const std::string& filename);
 };

@@ -49,14 +49,6 @@ public:
 //    }
 
     OutputData get() {
-        std::vector<double> args(8, 1); // начальные данные
-        const int N_ITERATION = 1e3;
-        for (int i = 0; i < N_ITERATION; ++i) {
-            Result res = solve(args);
-            // args =
-            // Как-то изменить args, тут делает Лёха
-        }
+        inputData;
     }
-
-
 };

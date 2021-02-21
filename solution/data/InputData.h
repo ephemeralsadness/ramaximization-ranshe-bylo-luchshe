@@ -23,7 +23,7 @@ class InputData {
         nQuals;
 
     std::vector<Qual>   quals;
-    std::vector<Month> month;
+    std::vector<Month>  month;
     std::vector<Person> persons;
 };
 

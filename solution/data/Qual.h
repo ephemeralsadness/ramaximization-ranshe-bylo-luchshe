@@ -9,6 +9,6 @@
 class Qual {
 public:
     std::string name;
-    int level;
-    int requiredPersonal;
+    int level,
+        requiredPersonalInMonth;
 };

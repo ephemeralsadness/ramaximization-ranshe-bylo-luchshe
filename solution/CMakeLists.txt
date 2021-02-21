@@ -3,4 +3,4 @@ project(ramaximization-ranshe-bylo-luchshe)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(ramaximize main.cpp Solver.cpp Solver.h Reader.cpp Reader.h constants.h)
+add_executable(ramaximize main.cpp Solver.cpp Solver.h)

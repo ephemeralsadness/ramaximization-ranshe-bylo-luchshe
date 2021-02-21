@@ -22,7 +22,7 @@ private:
     }
 
     void evaluateRequest(OutputData& data, const std::vector<double>& args) {
-        //data как-то заполняется
+        //input как-то заполняется
     }
 
     void fullFill(OutputData& data, const std::vector<double>& args) {

@@ -1,5 +1,7 @@
 #include "InputData.h"
 
+using namespace std;
+
 Month& InputData::getMonth(int monthNumber) {
     return year.at(monthNumber);
 }
@@ -12,6 +14,6 @@ Qualification& InputData::getQualification(const Qualification::Id& id) {
     return qualifications.at(id);
 }
 
-std::vector<Request>& InputData::getRequests() {
+vector<Request>& InputData::getRequests() {
     return requests;
 }

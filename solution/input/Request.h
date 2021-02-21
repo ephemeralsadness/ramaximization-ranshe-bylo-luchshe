@@ -1,10 +1,15 @@
 #pragma once
 
+#include "Staff.h"
+
 class Request {
 public:
     Request();
     calculateRating();
+
+
+
 private:
-    int staffId;
+    Staff::Id staffId;
     int priority;
 };

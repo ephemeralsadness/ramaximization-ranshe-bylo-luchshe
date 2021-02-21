@@ -2,10 +2,14 @@
 
 #include <vector>
 #include <map>
+#include "Staff.h"
 
 class Month {
-    int number,
-        maxSize;
-    bool isPriority;
-    std::map<Qual, int> requestsNeed;
+public:
+
+private:
+    bool isTop;
+    int maxVacationSize;
+    std::map<Qualification::Id, int> hoursNeed;
+    std::map<Staff::Id, int> staffRequests;
 };

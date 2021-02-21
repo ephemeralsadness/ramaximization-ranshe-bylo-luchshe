@@ -10,7 +10,5 @@ int main(int argc, char* argv[]) {
     const string INPUT_FILE_NAME = argv[0];
     const string OUTPUT_FILE_NAME = argv[1];
 
-    Reader
-
     return 0;
 }

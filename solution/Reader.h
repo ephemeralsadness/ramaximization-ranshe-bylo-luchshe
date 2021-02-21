@@ -1,6 +1,6 @@
 #pragma once
 
-#include "data/InputData.h"
+#include "input/InputData.h"
 
 #include <vector>
 #include <string>

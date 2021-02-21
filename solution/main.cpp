@@ -1,7 +1,7 @@
 #include "Reader.h"
 #include "Solver.h"
-#include "data/InputData.h"
-#include "data/OutputData.h"
+#include "input/InputData.h"
+#include "output/OutputData.h"
 
 #include <iostream>
 

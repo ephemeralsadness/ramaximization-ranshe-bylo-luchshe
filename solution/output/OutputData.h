@@ -2,7 +2,7 @@
 
 #include <map>
 #include <vector>
-#include "Qual.h"
+#include "../input/Qualification.h"
 #include "PersonalRest.h"
 #include "TotalRest.h"
 

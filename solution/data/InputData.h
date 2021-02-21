@@ -8,25 +8,23 @@
 
 #include <vector>
 #include "Qual.h"
-#include "Mounth.h"
+#include "Month.h"
 
 class InputData {
     int REST_YEAR,
-    MIN_REST_SIZE,
-    MIN_REST_LAG,
-    TOTAL_RESTS,
-    PRIOR_RESTS,
-    NOPRIOR_RESTS,
-    REST_HIGH,
-    REST_LOW,
-    nMonths,
-    nQuals;
+        MIN_REST_SIZE,
+        MIN_REST_LAG,
+        TOTAL_RESTS,
+        PRIOR_RESTS,
+        NOPRIOR_RESTS,
+        REST_HIGH,
+        REST_LOW,
+        nMonths,
+        nQuals;
 
-    std::vector<Qual> quals;
-    std::vector<Mounth> mounth;
-    std::vector<Personal> personals;
-    std::vector<Request> requests;
-
+    std::vector<Qual>   quals;
+    std::vector<Month> month;
+    std::vector<Person> persons;
 };
 
 

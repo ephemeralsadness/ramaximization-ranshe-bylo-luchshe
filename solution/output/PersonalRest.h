@@ -2,10 +2,12 @@
 
 class PersonalRest {
 public:
-    const int personalId;
-    const int month;
-    const int restSize;
-    const int requestRate;
+    int personalId;
+    int month;
+    int restSize;
+    int requestRate;
+
+    PersonalRest() {}
 
     PersonalRest(int personalId,
                  int month,

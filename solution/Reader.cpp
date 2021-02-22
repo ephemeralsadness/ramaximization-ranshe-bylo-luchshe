@@ -111,41 +111,40 @@ void Reader::readPersonalLevels() {
     constants::MAX_PERSONAL_LEVEL = maxPersonalLevel;
 };
 
+void Reader::readQuals() {
+    Reader::StringTable idTable = readFromCSV("quals");
+    for (int i = 0; i < idTable.size(); ++i) {
+        Qualification::Id id = idTable[i][0];
+        qualifications[id] = Qualification();
+        qualifications[id].name = id;
+    }
+};
+
 void Reader::readQualLevels() {
     Reader::StringTable table = readFromCSV("qual_levels");
     Reader::StringTable idTable = readFromCSV("quals");
     for (int i = 0; i < table.size(); ++i) {
         Qualification::Id id = idTable[i][0];
-        qualifications[id] = Qualification();
-        qualifications[id].name = id;
         qualifications[id].level = stoi(table[i][0]);
     }
 };
 
 void Reader::readQualified() {
     Reader::StringTable table = readFromCSV("qualified");
-    Reader::StringTable idTable = readFromCSV("quals");
-    for (int i = 0; i < table.size(); ++i) {
-        Qualification::Id id = idTable[i][0];
-        qualifications[id]
-    }
-};
-
-
-void Reader::readQuals() {
-    Reader::StringTable table = readFromCSV("quals");
     Reader::StringTable idPersonalTable = readFromCSV("personal_levels");
     Reader::StringTable idQualTable = readFromCSV("quals");
     for (int i = 0; i < idPersonalTable.size(); ++i) {
         Staff::Id id = stoi(idPersonalTable[i][0]);
         for (int j = 0; j < idQualTable.size(); ++j) {
-            Qualification::Id qualId = idQualTable[j][0];
             if (stoi(table[j][i]) == 1) {
+                Qualification::Id qualId = idQualTable[j][0];
                 staff[id].qualifications.push_back(qualId);
             }
         }
     }
 };
+
+
 
 void Reader::readRequiredPersonal() {
     Reader::StringTable table = readFromCSV("required_personal");

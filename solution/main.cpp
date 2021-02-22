@@ -14,12 +14,13 @@ int main(int argc, char* argv[]) {
     const string INPUT_FOLDER_NAME = argv[0];
     const string OUTPUT_FILE_NAME = argv[1];
 
-    InputData inputData = Reader::readInputData(INPUT_FOLDER_NAME);
+    Reader reader;
+    InputData inputData = reader.getInputData(INPUT_FOLDER_NAME);
 
     Solver solver(inputData);
     OutputData outputData = solver.get();
 
-    Writer writer(outputData);
-    writer.writeToCSV(OUTPUT_FILE_NAME);
+    Writer writer;
+    writer.writeToCSV(outputData, OUTPUT_FILE_NAME);
     return 0;
 }

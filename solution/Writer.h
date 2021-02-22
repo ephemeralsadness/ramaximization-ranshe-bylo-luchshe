@@ -2,10 +2,6 @@
 #include <fstream>
 #include "constants.h"
 class Writer {
-private:
-    OutputData outputData;
 public:
-    Writer(OutputData outputData) : outputData(outputData) {}
-
-    void writeToCSV(std::string outPutFolder="outputCSV/");
+    void writeToCSV(OutputData outputData, std::string outPutFolder="outputCSV/");
 };

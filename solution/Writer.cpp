@@ -5,7 +5,7 @@
 #include "Writer.h"
 
 
-void Writer::writeToCSV(std::string outPutFolder) {
+void Writer::writeToCSV(OutputData outputData, std::string outPutFolder) {
     std::ofstream personalRests, totalRests, qualDeficits, workingHours, monthResults;
     std::string path = outPutFolder;
     personalRests.open(path+"personalRests.csv");

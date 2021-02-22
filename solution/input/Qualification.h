@@ -13,5 +13,4 @@ public:
 
     Id name;
     int level;
-    int priority;
 };

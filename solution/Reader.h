@@ -9,6 +9,7 @@
 class Reader {
 public:
     using StringTable = std::vector<std::vector<std::string>>;
+    // TODO lexa uses function makeCSVMap
     static InputData readInputData(const std::string& folderName);
 private:
     static std::map<std::string, StringTable> makeCSVMap(const std::string& folderName);

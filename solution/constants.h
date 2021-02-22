@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include "output/OutputData.h"
 
 namespace constants {
 
@@ -36,3 +37,12 @@ namespace constants {
     const std::string CSV = ".csv";
 
 }
+
+class God {
+public:
+    static God*
+private:
+    static God* self_;
+    InputData input;
+    OutputData output;
+};

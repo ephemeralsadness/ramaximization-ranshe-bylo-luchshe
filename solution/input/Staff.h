@@ -11,13 +11,7 @@ private:
     Id id;
     int level;
     int maxHours;
-    std::vector<std::string> qualifications;
+    std::vector<Qualification::Id> qualifications;
     int minStart;
     int maxStart;
-
-
-    std::vector<Qualification> quals;
-    std::vector<int> maxFlyInMonth;
-    std::vector<int> restReqs;
-    std::vector<int> restPriors;
 };

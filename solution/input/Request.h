@@ -5,9 +5,9 @@
 class Request {
 public:
     Request();
-    calculateRating();
-
-
+    int calculateRating() {
+        return
+    }
 
 private:
     Staff::Id staffId;

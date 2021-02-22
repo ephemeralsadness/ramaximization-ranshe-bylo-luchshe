@@ -6,7 +6,7 @@
 #include "input/InputData.h"
 #include "output/OutputData.h"
 #include "constants.h"
-
+#include <iostream>
 
 
 class Solver {
@@ -17,7 +17,7 @@ public:
 private:
     InputData inputData;
     std::map<int, std::map<Qualification::Id, int>> possibilities;
-    std::map<Staff::Id, std::vector<Request*>> staffIdToRequests;
+    std::map<Staff::Id, std::vector<Request>> staffIdToRequests;
 
     int calculateRating(Request& req) {
         Staff& s = inputData.getStaff(req.getStaffId());
@@ -37,7 +37,7 @@ private:
 
             int sm = 0;
             for (auto x : vv) {
-                sm += x->getHours();
+                sm += x.getHours();
             }
 
             int need = input.getStaff(id).maxHours * 2;
@@ -65,8 +65,8 @@ private:
         for (auto& pp : staffIdToRequests) {
             auto& vv = pp.second;
             for (auto x : vv) {
-                othours[x->getMonth()] += x->getHours();
-                otamount[x->getMonth()] += 1;
+                othours[x.getMonth()] += x.getHours();
+                otamount[x.getMonth()] += 1;
             }
         }
 
@@ -82,11 +82,11 @@ private:
 
     void evaluateRequests(InputData& input, std::map<int, std::map<Qualification::Id, int>>& possible, OutputData& output) {
         staffIdToRequests.clear();
-        auto comp_req_pointers = [](Request* lhs, Request* rhs) -> bool {
-            return lhs->getMonth() < rhs->getMonth();
+        auto comp_req_pointers = [](Request lhs, Request rhs) -> bool {
+            return lhs.getMonth() < rhs.getMonth();
         };
 
-        std::vector<Request> requests = input.getRequests();
+        std::vector<Request>& requests = input.getRequests();
         std::sort(requests.begin(), requests.end(), [this](Request& lhs, Request& rhs) {
             return this->calculateRating(lhs) > this->calculateRating(rhs);
         });
@@ -104,14 +104,14 @@ private:
 
             int sm = req.getHours();
             for (auto r : v)
-                sm += r->getHours();
+                sm += r.getHours();
 
-            if (sm > cs["MAX_REST_SIZE"]) continue;
+            if (sm > cs["REST_YEAR"]) continue;
 
             {
                 bool alpha = false;
                 for (auto r : v) {
-                    alpha |= (abs(r->getMonth() - req.getMonth()) < cs["MIN_REST_LAG"]);
+                    alpha |= (abs(r.getMonth() - req.getMonth()) < cs["MIN_REST_LAG"]);
                 }
                 if (alpha) continue;
             }
@@ -122,12 +122,12 @@ private:
                 int toph = 0;
                 int notoph = 0;
                 for (auto r : v) {
-                    if (inputData.getMonth(r->getMonth()).isTop) {
+                    if (inputData.getMonth(r.getMonth()).isTop) {
                         ++topc;
-                        toph += r->getHours();
+                        toph += r.getHours();
                     } else {
                         ++notopc;
-                        notoph += r->getHours();
+                        notoph += r.getHours();
                     }
                 }
 
@@ -149,9 +149,8 @@ private:
                 Staff& s = inputData.getStaff(req.getStaffId());
                 if (!s.qualifications.empty()) {
                     Qualification& q = input.getQualification(s.qualifications.front());
-                    int& needHours = m.hoursNeed[q.name];
-                    if (possible[req.getMonth()][s.qualifications.front()] - needHours
-                            >= m.hoursNeed[q.name]) {
+                    int needHours = req.getHours();
+                    if (possible[req.getMonth()][s.qualifications.front()] - needHours >= m.hoursNeed[q.name]) {
                         possible[req.getMonth()][s.qualifications.front()] -= needHours;
                     } else {
                         continue;
@@ -159,8 +158,11 @@ private:
                 }
             }
 
+            if (req.getMonth() > 12 || req.getMonth() < 0)
+                std::cout << req.getMonth();
+
             accepted[i] = true;
-            v.push_back(&req);
+            v.push_back(req);
             std::sort(v.begin(), v.end(), comp_req_pointers);
         }
 
@@ -170,8 +172,8 @@ private:
     }
 
     void fullFill(std::map<int, std::map<Qualification::Id, int>>& possible, OutputData& data) {
-        auto comp_req_pointers = [](Request* lhs, Request* rhs) -> bool {
-            return lhs->getMonth() < rhs->getMonth();
+        auto comp_req_pointers = [](Request lhs, Request rhs) -> bool {
+            return lhs.getMonth() < rhs.getMonth();
         };
         auto& cs = constants::REST_CONSTANTS;
 
@@ -197,14 +199,14 @@ private:
 
                 int sm = req.getHours();
                 for (auto r : v)
-                    sm += r->getHours();
+                    sm += r.getHours();
 
-                if (sm > cs["MAX_REST_SIZE"]) continue;
+                if (sm > cs["REST_YEAR"]) continue;
 
                 {
                     bool alpha = false;
                     for (auto r : v) {
-                        alpha |= (abs(r->getMonth() - req.getMonth()) < cs["MIN_REST_LAG"]);
+                        alpha |= (abs(r.getMonth() - req.getMonth()) < cs["MIN_REST_LAG"]);
                     }
                     if (alpha) continue;
                 }
@@ -215,12 +217,12 @@ private:
                     int toph = 0;
                     int notoph = 0;
                     for (auto r : v) {
-                        if (inputData.getMonth(r->getMonth()).isTop) {
+                        if (inputData.getMonth(r.getMonth()).isTop) {
                             ++topc;
-                            toph += r->getHours();
+                            toph += r.getHours();
                         } else {
                             ++notopc;
-                            notoph += r->getHours();
+                            notoph += r.getHours();
                         }
                     }
 
@@ -242,7 +244,7 @@ private:
                     Staff& s = inputData.getStaff(req.getStaffId());
                     if (!s.qualifications.empty()) {
                         Qualification& q = inputData.getQualification(s.qualifications.front());
-                        int& needHours = m.hoursNeed[q.name];
+                        int needHours = req.getHours();
                         if (possible[req.getMonth()][s.qualifications.front()] - needHours
                             >= m.hoursNeed[q.name]) {
                             possible[req.getMonth()][s.qualifications.front()] -= needHours;
@@ -252,7 +254,10 @@ private:
                     }
                 }
 
-                v.push_back(&req);
+                if (req.getMonth() > 12 || req.getMonth() < 0)
+                    std::cout << req.getMonth();
+
+                v.push_back(req);
                 std::sort(v.begin(), v.end(), comp_req_pointers);
 
             }

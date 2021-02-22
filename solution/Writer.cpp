@@ -15,7 +15,7 @@ void Writer::writeToCSV(OutputData outputData, std::string outPutFolder) {
     monthResults.open(path+"monthResults.csv");
 
     if(personalRests.is_open()){
-        personalRests<<"Employee,Month,Rest Size,Request\n";
+        personalRests<<"Employee,Rest Size,Month,Request\n";
         for(auto x: outputData.personalRests)
             personalRests<<x.personalId<<','<<x.restSize<<','<<x.month<<','<<x.requestRate<<'\n';
     }

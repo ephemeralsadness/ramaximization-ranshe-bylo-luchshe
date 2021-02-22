@@ -5,14 +5,19 @@
 #include "input/InputData.h"
 #include "output/OutputData.h"
 
-int calculateRating(InputData& input, Request& req) {
-    Staff& s = input.getStaff(req.getStaff());
-    return (4 - req.getPriority()) * (MAX_PERSONAL_LEVEL + 1) + s.getLevel();
-}
 
 class Solver {
 private:
     InputData inputData;
+
+    int calculateRating(Request& req) {
+        Staff& s = inputData.getStaff(req.getStaff());
+        return (4 - req.getPriority()) * (MAX_PERSONAL_LEVEL + 1) + s.getLevel();
+    }
+
+    bool isGoodRequest(Request& req) {
+        return true;
+    }
 
     struct Result {
         double sumRating,
@@ -35,11 +40,19 @@ private:
             return calculateRating(this->inputData, lhs) > calculateRating(this->inputData, rhs);
         });
 
-        for
+        std::map<Staff::Id, std::vector<
+
+        for (auto& req : requests) {
+            if (isGoodRequest(req)) {
+                // TODO
+            }
+        }
+
+
     }
 
     void fullFill(OutputData& data, const std::vector<double>& args) {
-        //
+
     }
 
     Result getCost(const OutputData& data) {

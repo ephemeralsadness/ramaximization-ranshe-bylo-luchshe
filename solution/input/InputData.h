@@ -22,11 +22,6 @@ public:
     Staff& getStaff(Staff::Id id);
     Qualification& getQualification(const Qualification::Id& id);
     std::vector<Request>& getRequests();
-    std::vector<std::vector<int>> GetWantedRests() const; // возвращает запрошенные часы отдыха каждым работником по месяцам (упорядоченные по id)
-    std::vector<int> GetRequestsRates() const; //должно возвращать вектор пощитанных векторов заявок для каждого работника (упорядоченный по id)
-    std::vector<std::vector<int>> GetWantedWorkHours() const; //возвращает необходимое каждый месяц число часов работы
-    std::vector<bool> GetCoolMonth() const; //возвращает вектор в котором 1 значит что месяц классный, а 0 - обычный
-    std::vector<int> GetMaxFlies() const; //возвращает максимальные допустиме часы работы у работников
     int GetRestYear() const; //возвращает параметр REST_YEAR
     int GetMinRestSize() const; //возвращает MIN_REST_SIZE
     int GetMinLag() const; // возвращает MIN_REST_LAG

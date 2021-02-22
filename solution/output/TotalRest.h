@@ -1,4 +1,5 @@
 class TotalRest {
+public:
     const int personalId;
     const int nRest;
     const int nHour;

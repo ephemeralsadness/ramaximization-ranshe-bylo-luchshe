@@ -17,8 +17,8 @@ public:
         staffRequests[request.getStaffId()];
     }
 
-    bool isTop;
-    int maxVacationSize;
+    bool isTop = false;
+    int maxVacationSize = 0;
     std::map<Qualification::Id, int> hoursNeed;
     std::map<Staff::Id, Request> staffRequests;
 };

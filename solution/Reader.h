@@ -1,7 +1,6 @@
 #pragma once
 
 #include "input/InputData.h"
-
 #include <vector>
 #include <string>
 #include <map>

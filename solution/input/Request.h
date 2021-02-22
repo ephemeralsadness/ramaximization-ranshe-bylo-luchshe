@@ -6,7 +6,7 @@ class Request {
 public:
     Request();
     int calculateRating() {
-        return
+        // TODO calculate rating.
     }
 
 private:

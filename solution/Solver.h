@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 #include "input/InputData.h"
 #include "output/OutputData.h"
 
@@ -15,14 +16,20 @@ private:
     };
 
     Result solve(const std::vector<double>& args) {
-        OutputData data;
-        evaluateRequest(data, args);
-        fullFill(data, args);
-        return getCost(data);
+        InputData input = inputData;
+        OutputData output;
+        evaluateRequests(input, output, args);
+        fullFill(output, args);
+
+        return getCost(output);
     }
 
-    void evaluateRequest(OutputData& data, const std::vector<double>& args) {
-        //input как-то заполняется
+    void evaluateRequests(InputData& input, OutputData& output, const std::vector<double>& args) {
+        std::vector<Request> requests = input.getRequests();
+        inputData.
+        std::sort(requests.begin(), requests.end(), [](const Request& lhs, const Request& rhs) {
+            return
+        })
     }
 
     void fullFill(OutputData& data, const std::vector<double>& args) {
@@ -36,7 +43,7 @@ private:
 
 public:
 
-    Solver(const InputData& data) : inputData(data) {}
+    Solver(InputData data) : inputData(std::move(data)) {}
 
 //    OutputData get() {
 //        std::vector<double> args(8, 1); // начальные данные

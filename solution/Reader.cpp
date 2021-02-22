@@ -73,6 +73,7 @@ void Reader::readMaxFly() {
 //        std::cout << i << ' ' << idTable[i][0] << ' ' << table[i][0] << std::endl;
         Staff::Id id = stoi(idTable[i][0]);
         staff[id] = Staff();
+        staff[id].id = id;
         staff[id].maxHours = stoi(table[i][0]);
     }
 }

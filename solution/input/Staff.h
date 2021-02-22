@@ -10,8 +10,6 @@ public:
     int getLevel() {
         return level;
     }
-
-private:
     Id id;
     int level;
     int maxHours;

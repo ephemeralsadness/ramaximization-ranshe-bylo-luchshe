@@ -92,6 +92,17 @@ private:
                 }
             }
 
+            {
+                // check if it will ne deficit. If it will be, than all is bad.
+                Month& m = inputData.getMonth(req.getMonth());
+                Staff& s = inputData.getStaff(req.getStaffId());
+                Qualification& q = input.getQualification(s.)
+                int& akjsfunsadhjansakdjnsa = m.hoursNeed()
+
+                // do some changes
+
+            }
+
             v.push_back(&req);
             std::sort(v.begin(), v.end(), comp_req_pointers);
         }

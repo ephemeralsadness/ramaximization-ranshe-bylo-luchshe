@@ -7,6 +7,10 @@ class Staff {
 public:
     using Id = int;
 
+    int getLevel() {
+        return level;
+    }
+
 private:
     Id id;
     int level;

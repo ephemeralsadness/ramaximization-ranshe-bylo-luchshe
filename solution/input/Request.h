@@ -9,6 +9,8 @@ public:
         // TODO calculate rating.
     }
 
+    Staff::Id getStaff() {}
+
 private:
     Staff::Id staffId;
     int priority;

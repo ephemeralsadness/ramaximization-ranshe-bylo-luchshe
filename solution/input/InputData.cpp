@@ -2,10 +2,6 @@
 
 using namespace std;
 
-Month& InputData::getMonth(int monthNumber) {
-    return year.at(monthNumber);
-}
-
 Staff& InputData::getStaff(Staff::Id id) {
     return staff.at(id);
 }
@@ -56,4 +52,13 @@ int InputData::GetNMonth() const {
 
 int InputData::GetNQ() const {
     return constants::REST_CONSTANTS[constants::REST_CONSTANT_NAMES[9]];
+}
+
+std::vector<std::vector<int>> InputData::GetWantedRests() const {
+    std::vector<std::vector<int>> res;
+
+}
+
+Month& InputData::getMonth(int monthNumber) {
+    return year.at(monthNumber);
 }

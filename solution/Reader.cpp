@@ -18,7 +18,7 @@ map<string, Reader::StringTable> Reader::makeCSVMap(const std::string& folderNam
 }
 
 
-Reader::StringTable Reader::readFromCSV(const string& filename) {
+Reader::StringTable Reader::readFromCSV(const std::string &filename) {
     ifstream ifs(filename);
 
     vector<vector<string>> data;
@@ -44,6 +44,7 @@ Reader::StringTable Reader::readFromCSV(const string& filename) {
 
 InputData Reader::getInputData(const std::string& folderName) {
     year = std::vector<Month>(12, Month());
+    CSVMap = makeCSVMap(folderName);
 
     for (const auto& fileName : constants::CSV_TABLE_NAMES) {
         fileName == "max_fly" ? readMaxFly() :
@@ -64,8 +65,8 @@ InputData Reader::getInputData(const std::string& folderName) {
 }
 
 void Reader::readMaxFly() {
-    Reader::StringTable table = readFromCSV("max_fly");
-    Reader::StringTable idTable = readFromCSV("personal_levels");
+    Reader::StringTable table = CSVMap["max_fly"];
+    Reader::StringTable idTable = CSVMap["personal_levels"];
 
     for (int i = 0; i < table.size(); ++i) {
         Staff::Id id = stoi(idTable[i][0]);
@@ -75,14 +76,14 @@ void Reader::readMaxFly() {
 }
 
 void Reader::readMaxStarts() {
-    Reader::StringTable table = readFromCSV("max_starts");
+    Reader::StringTable table = CSVMap["max_starts"];
     for (int i = 0; i < table.size(); ++i) {
         staff[i].maxStart = stoi(table[i][0]);
     }
 };
 
 void Reader::readMonths() {
-    Reader::StringTable table = readFromCSV("months");
+    Reader::StringTable table = CSVMap["months"];
     for (int i = 0; i < table.size(); ++i) {
         int month = stoi(table[i][0]) - 1;
         int isTop = stoi(table[i][1]);
@@ -93,14 +94,14 @@ void Reader::readMonths() {
 };
 
 void Reader::readParams() {
-    Reader::StringTable table = readFromCSV("params");
+    Reader::StringTable table = CSVMap["params"];
     for (int i = 0; i < table.size(); ++i) {
         constants::REST_CONSTANTS[table[i][0]] = stoi(table[i][1]);
     }
 };
 
 void Reader::readPersonalLevels() {
-    Reader::StringTable table = readFromCSV("personal_levels");
+    Reader::StringTable table = CSVMap["personal_levels"];
     int maxPersonalLevel = -1;
     for (int i = 0; i < table.size(); ++i) {
         Staff::Id id = stoi(table[i][0]);
@@ -112,7 +113,7 @@ void Reader::readPersonalLevels() {
 };
 
 void Reader::readQuals() {
-    Reader::StringTable idTable = readFromCSV("quals");
+    Reader::StringTable idTable = CSVMap["quals"];
     for (int i = 0; i < idTable.size(); ++i) {
         Qualification::Id id = idTable[i][0];
         qualifications[id] = Qualification();
@@ -121,8 +122,8 @@ void Reader::readQuals() {
 };
 
 void Reader::readQualLevels() {
-    Reader::StringTable table = readFromCSV("qual_levels");
-    Reader::StringTable idTable = readFromCSV("quals");
+    Reader::StringTable table = CSVMap["qual_levels"];
+    Reader::StringTable idTable = CSVMap["quals"];
     for (int i = 0; i < table.size(); ++i) {
         Qualification::Id id = idTable[i][0];
         qualifications[id].level = stoi( table[i][0]);
@@ -130,9 +131,9 @@ void Reader::readQualLevels() {
 };
 
 void Reader::readQualified() {
-    Reader::StringTable table = readFromCSV("qualified");
-    Reader::StringTable idPersonalTable = readFromCSV("personal_levels");
-    Reader::StringTable idQualTable = readFromCSV("quals");
+    Reader::StringTable table = CSVMap["qualified"];
+    Reader::StringTable idPersonalTable = CSVMap["personal_levels"];
+    Reader::StringTable idQualTable = CSVMap["quals"];
     for (int i = 0; i < idPersonalTable.size(); ++i) {
         Staff::Id id = stoi(idPersonalTable[i][0]);
         for (int j = 0; j < idQualTable.size(); ++j) {
@@ -147,8 +148,8 @@ void Reader::readQualified() {
 
 
 void Reader::readRequiredPersonal() {
-    Reader::StringTable table = readFromCSV("required_personal");
-    Reader::StringTable idQualTable = readFromCSV("quals");
+    Reader::StringTable table = CSVMap["required_personal"];
+    Reader::StringTable idQualTable = CSVMap["quals"];
     for (int i = 0; i < 12; ++i) {
         for (int j = 0; j < table.size(); ++j) {
             year[i].hoursNeed[idQualTable[j][0]] = stoi(table[j][i]);
@@ -157,8 +158,8 @@ void Reader::readRequiredPersonal() {
 };
 
 void Reader::readRestPrior() {
-    Reader::StringTable tablePrior = readFromCSV("rest_prior");
-    Reader::StringTable tableReq = readFromCSV("rest_req");
+    Reader::StringTable tablePrior = CSVMap["rest_prior"];
+    Reader::StringTable tableReq = CSVMap["rest_req"];
     for (int i = 0; i < tableReq.size(); ++i) {
         for (int month = 0; month < 12; ++month) {
             int restReq = stoi(tableReq[i][month]);
@@ -171,9 +172,9 @@ void Reader::readRestPrior() {
 };
 
 void Reader::rest_req() {
-    Reader::StringTable tableReq = readFromCSV("rest_req");
-    Reader::StringTable tablePrior = readFromCSV("rest_prior");
-    Reader::StringTable idPersonalTable = readFromCSV("personal_levels");
+    Reader::StringTable tableReq = CSVMap["rest_req"];
+    Reader::StringTable tablePrior = CSVMap["rest_prior"];
+    Reader::StringTable idPersonalTable = CSVMap["personal_levels"];
 
     for (int i = 0; i < tableReq.size(); ++i) {
         Staff::Id id = stoi(idPersonalTable[i][0]);
@@ -194,8 +195,8 @@ void Reader::rest_req() {
 };
 
 void Reader::starts() {
-    Reader::StringTable table = readFromCSV("starts");
-    Reader::StringTable idTable = readFromCSV("personal_levels");
+    Reader::StringTable table = CSVMap["starts"];
+    Reader::StringTable idTable = CSVMap["personal_levels"];
     for (int i = 0; i < table.size(); ++i) {
         Staff::Id id = stoi(idTable[i][0]);
         staff[id].minStart = stoi(table[i][0]);

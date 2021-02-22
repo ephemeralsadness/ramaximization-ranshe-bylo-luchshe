@@ -181,6 +181,7 @@ void Reader::rest_req() {
     Reader::StringTable tablePrior = CSVMap["rest_prior"];
     Reader::StringTable idPersonalTable = CSVMap["personal_levels"];
 
+    int k = 0;
     for (int i = 0; i < tableReq.size(); ++i) {
         Staff::Id id = stoi(idPersonalTable[i][0]);
 
@@ -190,11 +191,12 @@ void Reader::rest_req() {
 
             if (restReq == 0 && restPrior == 0) continue;
 
-            requests[i].staffId = id;
-            requests[i].month = month;
-            requests[i].hours = restReq;
-            requests[i].priority = restPrior;
-            year[month].staffRequests[id] = requests[i];
+            requests[k].staffId = id;
+            requests[k].month = month;
+            requests[k].hours = restReq;
+            requests[k].priority = restPrior;
+            year[month].staffRequests[id] = requests[k];
+            k++;
         }
     }
 };

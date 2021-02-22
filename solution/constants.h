@@ -30,8 +30,8 @@ namespace constants {
             "NOPRIOR_RESTS",
             "REST_HIGH",
             "REST_LOW",
-            "N_MONTHS",
-            "N_QUALS"
+            "nMonths",
+            "nQuals"
     };
 
     std::map<std::string, int> REST_CONSTANTS;

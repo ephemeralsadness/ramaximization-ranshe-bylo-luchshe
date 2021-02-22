@@ -38,11 +38,7 @@ namespace constants {
 
 }
 
-class God {
-public:
-    static God*
-private:
-    static God* self_;
-    InputData input;
-    OutputData output;
+namespace God {
+    InputData* input;
+    OutputData* output;
 };

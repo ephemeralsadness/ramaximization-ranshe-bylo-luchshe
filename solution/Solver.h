@@ -7,7 +7,7 @@
 
 class Solver {
 private:
-    const InputData inputData;
+    InputData inputData;
 
     struct Result {
         double sumRating,
@@ -26,10 +26,9 @@ private:
 
     void evaluateRequests(InputData& input, OutputData& output, const std::vector<double>& args) {
         std::vector<Request> requests = input.getRequests();
-        inputData.
-        std::sort(requests.begin(), requests.end(), [](const Request& lhs, const Request& rhs) {
-            return
-        })
+        std::sort(requests.begin(), requests.end(), [this](const Request& lhs, const Request& rhs) {
+            return true;
+        });
     }
 
     void fullFill(OutputData& data, const std::vector<double>& args) {

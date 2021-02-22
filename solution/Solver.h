@@ -47,8 +47,7 @@ private:
         std::map<Staff::Id, std::vector<Request*>> staffIdToRequests;
 
         for (auto& req : requests) {
-            auto good = true;
-            auto& v = staffIdToRequests[req.getStaff()];
+            auto& v = staffIdToRequests[req.getStaffId()];
 
             if (v.size() >= cs["TOTAL_RESTS"]) continue;
             if (req.getHours() < cs["MIN_REST_SIZE"]) continue;
@@ -70,15 +69,32 @@ private:
             {
                 int topc = 0;
                 int notopc = 0;
+                int toph = 0;
+                int notoph = 0;
                 for (auto r : v) {
-                    if (inputData.getMonth(r->getMonth()).)
+                    if (inputData.getMonth(r->getMonth()).isTop) {
+                        ++topc;
+                        toph += r->getHours();
+                    } else {
+                        ++notopc;
+                        notoph += r->getHours();
+                    }
+                }
+
+                if (inputData.getMonth(req.getMonth()).isTop) {
+                    if (topc == cs["PRIOR_RESTS"] || toph > cs["REST_HIGH"]) {
+                        continue;
+                    }
+                } else {
+                    if (notopc == cs["NOPRIOR_RESTS"] || notoph > cs["REST_LOW"]) {
+                        continue;
+                    }
                 }
             }
 
+            v.push_back(&req);
             std::sort(v.begin(), v.end(), comp_req_pointers);
         }
-
-
     }
 
     void fullFill(OutputData& data, const std::vector<double>& args) {

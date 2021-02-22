@@ -25,14 +25,12 @@ private:
                deficit;
     };
 
-    Result solve(const std::vector<double>& args) {
+    void solve(const std::vector<double>& args) {
         InputData input = inputData;
         auto possible = possibilities;
         OutputData output;
         evaluateRequests(input, possible, output, args);
         fullFill(possible, output, args);
-
-        return getCost(output);
     }
 
     void evaluateRequests(InputData& input, std::map<int, std::map<Qualification::Id, int>>& possible, OutputData& output, const std::vector<double>& args) {
@@ -206,12 +204,6 @@ private:
 
         }
     }
-
-    Result getCost(const OutputData& data) {
-        // тут формула
-    }
-
-
 public:
 
     Solver(InputData data) : inputData(std::move(data)) {
@@ -234,7 +226,4 @@ public:
 //        }
 //    }
 
-    OutputData get() {
-        inputData;
-    }
 };

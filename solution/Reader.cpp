@@ -120,11 +120,27 @@ void Reader::readQualLevels() {
 
 void Reader::readQualified() {
     Reader::StringTable table = readFromCSV("qualified");
+    Reader::StringTable idTable = readFromCSV("quals");
+    for (int i = 0; i < table.size(); ++i) {
+        Qualification::Id id = idTable[i][0];
+        qualifications[id]
+    }
 };
 
 
 void Reader::readQuals() {
     Reader::StringTable table = readFromCSV("quals");
+    Reader::StringTable idPersonalTable = readFromCSV("personal_levels");
+    Reader::StringTable idQualTable = readFromCSV("quals");
+    for (int i = 0; i < idPersonalTable.size(); ++i) {
+        Staff::Id id = stoi(idPersonalTable[i][0]);
+        for (int j = 0; j < idQualTable.size(); ++j) {
+            Qualification::Id qualId = idQualTable[j][0];
+            if (stoi(table[j][i]) == 1) {
+                staff[id].qualifications.push_back(qualId);
+            }
+        }
+    }
 };
 
 void Reader::readRequiredPersonal() {

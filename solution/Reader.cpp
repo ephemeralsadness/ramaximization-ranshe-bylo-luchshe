@@ -42,6 +42,72 @@ Reader::StringTable Reader::readFromCSV(const string& filename) {
     return data;
 }
 
-InputData Reader::readInputData(const std::string& folderName) {
+InputData Reader::getInputData(const std::string& folderName) {
+    year = std::vector<Month>(12, Month());
+
+    for (const auto& fileName : constants::CSV_TABLE_NAMES) {
+        fileName == "max_fly" ? readMaxFly() :
+        fileName == "max_starts" ? readMaxStarts() :
+        fileName == "months" ? readMonths() :
+        fileName == "params" ? readParams() :
+        fileName == "personal_levels" ? readPersonalLevels() :
+        fileName == "qualified" ? readQualified() :
+        fileName == "qual_levels" ? readQualLevels() :
+        fileName == "quals" ? readQuals() :
+        fileName == "required_personal" ? readRequiredPersonal() :
+        fileName == "rest_prior" ? readRestPrior() :
+        fileName == "rest_req" ? rest_req() :
+        fileName == "starts" ? starts() : nothing();
+    }
+
+    return InputData(year, staff, qualifications, requests);
+}
+
+void Reader::readMaxFly() {
+    Reader::StringTable table = readFromCSV("max_fly");
 
 }
+
+void Reader::readMaxStarts() {
+    Reader::StringTable table = readFromCSV("max_starts");
+};
+
+void Reader::readMonths() {
+    Reader::StringTable table = readFromCSV("months");
+};
+
+void Reader::readParams() {
+    Reader::StringTable table = readFromCSV("params");
+};
+
+void Reader::readPersonalLevels() {
+    Reader::StringTable table = readFromCSV("personal_levels");
+};
+
+void Reader::readQualified() {
+    Reader::StringTable table = readFromCSV("qualified");
+};
+
+void Reader::readQualLevels() {
+    Reader::StringTable table = readFromCSV("qual_levels");
+};
+
+void Reader::readQuals() {
+    Reader::StringTable table = readFromCSV("quals");
+};
+
+void Reader::readRequiredPersonal() {
+    Reader::StringTable table = readFromCSV("required_personal");
+};
+
+void Reader::readRestPrior() {
+    Reader::StringTable table = readFromCSV("rest_prior");
+};
+
+void Reader::rest_req() {
+    Reader::StringTable table = readFromCSV("rest_req");
+};
+
+void Reader::starts() {
+    Reader::StringTable table = readFromCSV("starts");
+};

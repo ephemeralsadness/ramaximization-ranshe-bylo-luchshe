@@ -6,7 +6,7 @@ class Request {
 public:
     Request(Staff::Id staffId_, int priority_) : staffId(staffId_), priority(priority_) {}
 
-    Staff::Id getStaff() {
+    Staff::Id getStaffId() {
         return staffId;
     }
 

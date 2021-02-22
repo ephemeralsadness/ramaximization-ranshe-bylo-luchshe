@@ -46,7 +46,7 @@ struct Params{
     int REST_HIGH ;
     int REST_LOW ;
     int nMonth;
-    int nQ = ;
+    int nQ;
 };
 
 /*

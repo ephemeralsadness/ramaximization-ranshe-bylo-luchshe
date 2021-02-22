@@ -10,7 +10,7 @@
 
 class InputData {
 public:
-    InputData(std::array<Month, 12> year_, std::map<Staff::Id, Staff> staff_,
+    InputData(std::vector<Month> year_, std::map<Staff::Id, Staff> staff_,
               std::map<Qualification::Id, Qualification> qualifications_, std::vector<Request> requests_)
               : year(move(year_))
               , staff(move(staff_))
@@ -38,7 +38,7 @@ public:
     int GetNQ() const;// возвращает..
 
 private:
-    std::array<Month, 12> year;
+    std::vector<Month> year;
     std::map<Staff::Id, Staff> staff;
     std::map<Qualification::Id, Qualification> qualifications;
     std::vector<Request> requests;

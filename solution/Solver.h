@@ -5,6 +5,11 @@
 #include "input/InputData.h"
 #include "output/OutputData.h"
 
+int calculateRating(InputData& input, Request& req) {
+    Staff& s = input.getStaff(req.getStaff());
+    return (4 - req.getPriority()) * (MAX_PERSONAL_LEVEL + 1) + s.getLevel();
+}
+
 class Solver {
 private:
     InputData inputData;
@@ -26,9 +31,11 @@ private:
 
     void evaluateRequests(InputData& input, OutputData& output, const std::vector<double>& args) {
         std::vector<Request> requests = input.getRequests();
-        std::sort(requests.begin(), requests.end(), [this](const Request& lhs, const Request& rhs) {
-            return true;
+        std::sort(requests.begin(), requests.end(), [this](Request& lhs, Request& rhs) {
+            return calculateRating(this->inputData, lhs) > calculateRating(this->inputData, rhs);
         });
+
+        for
     }
 
     void fullFill(OutputData& data, const std::vector<double>& args) {

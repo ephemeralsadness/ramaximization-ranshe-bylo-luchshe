@@ -12,10 +12,11 @@ public:
     std::vector<TotalRest> totalRests;
 
     // [месяц][квалификация] = количество дифицита
-    std::vector<std::map<Qualification, int>> qualDeficits;
+    std::vector<std::vector<int>> qualDeficits;
 
-    // По квалификации получаем вектор (месяц, количество проработанных часов)
-    std::map<Qualification, std::vector<int>> workingHours;
+    // [месяц][квалификация] =  количество проработанных часов
+    std::vector<std::vector<int>> workingHours;
 
+    //[месяъ]
     std::vector<MonthResult> monthResults;
 };

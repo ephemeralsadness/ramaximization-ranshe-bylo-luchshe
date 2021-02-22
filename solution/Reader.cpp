@@ -66,6 +66,7 @@ InputData Reader::getInputData(const std::string& folderName) {
 void Reader::readMaxFly() {
     Reader::StringTable table = readFromCSV("max_fly");
     Reader::StringTable idTable = readFromCSV("personal_levels");
+
     for (int i = 0; i < table.size(); ++i) {
         Staff::Id id = stoi(idTable[i][0]);
         staff[id] = Staff();
@@ -100,11 +101,14 @@ void Reader::readParams() {
 
 void Reader::readPersonalLevels() {
     Reader::StringTable table = readFromCSV("personal_levels");
+    int maxPersonalLevel = -1;
     for (int i = 0; i < table.size(); ++i) {
         Staff::Id id = stoi(table[i][0]);
         int level = stoi(table[i][1]);
         staff[id].level = level;
+        maxPersonalLevel = max(maxPersonalLevel, level);
     }
+    constants::MAX_PERSONAL_LEVEL = maxPersonalLevel;
 };
 
 void Reader::readQualLevels() {
@@ -145,16 +149,56 @@ void Reader::readQuals() {
 
 void Reader::readRequiredPersonal() {
     Reader::StringTable table = readFromCSV("required_personal");
+    Reader::StringTable idQualTable = readFromCSV("quals");
+    for (int i = 0; i < 12; ++i) {
+        for (int j = 0; j < table.size(); ++j) {
+            year[i].hoursNeed[idQualTable[j][0]] = stoi(table[j][i]);
+        }
+    }
 };
 
 void Reader::readRestPrior() {
-    Reader::StringTable table = readFromCSV("rest_prior");
+    Reader::StringTable tablePrior = readFromCSV("rest_prior");
+    Reader::StringTable tableReq = readFromCSV("rest_req");
+    for (int i = 0; i < tableReq.size(); ++i) {
+        for (int month = 0; month < 12; ++month) {
+            int restReq = stoi(tableReq[i][month]);
+            int restPrior = stoi(tablePrior[i][month]);
+            if (restReq == 0 && restPrior == 0) continue;
+
+            requests.push_back(Request());
+        }
+    }
 };
 
 void Reader::rest_req() {
-    Reader::StringTable table = readFromCSV("rest_req");
+    Reader::StringTable tableReq = readFromCSV("rest_req");
+    Reader::StringTable tablePrior = readFromCSV("rest_prior");
+    Reader::StringTable idPersonalTable = readFromCSV("personal_levels");
+
+    for (int i = 0; i < tableReq.size(); ++i) {
+        Staff::Id id = stoi(idPersonalTable[i][0]);
+
+        for (int month = 0; month < 12; ++month) {
+            int restReq = stoi(tableReq[i][month]);
+            int restPrior = stoi(tablePrior[i][month]);
+
+            if (restReq == 0 && restPrior == 0) continue;
+
+            requests[i].staffId = id;
+            requests[i].month = month;
+            requests[i].hours = restReq;
+            requests[i].priority = restPrior;
+            year[month].staffRequests[id] = requests[i];
+        }
+    }
 };
 
 void Reader::starts() {
     Reader::StringTable table = readFromCSV("starts");
+    Reader::StringTable idTable = readFromCSV("personal_levels");
+    for (int i = 0; i < table.size(); ++i) {
+        Staff::Id id = stoi(idTable[i][0]);
+        staff[id].minStart = stoi(table[i][0]);
+    }
 };

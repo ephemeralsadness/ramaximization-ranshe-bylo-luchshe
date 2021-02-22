@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "output/OutputData.h"
+#include "input/InputData.h"
 
 namespace constants {
 
@@ -38,9 +39,5 @@ namespace constants {
 
     const std::string CSV = ".csv";
 
+    int MAX_PERSONAL_LEVEL = 0;
 }
-
-namespace God {
-    InputData* input;
-    OutputData* output;
-};

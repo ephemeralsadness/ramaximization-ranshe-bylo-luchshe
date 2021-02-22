@@ -2,6 +2,7 @@
 #include "Solver.h"
 #include "input/InputData.h"
 #include "output/OutputData.h"
+#include "Writer.h"
 
 #include <iostream>
 
@@ -14,10 +15,11 @@ int main(int argc, char* argv[]) {
     const string OUTPUT_FILE_NAME = argv[1];
 
     InputData inputData = Reader::readInputData(INPUT_FOLDER_NAME);
+
     Solver solver(inputData);
     OutputData outputData = solver.get();
-    // TODO output outputData
-    // TODO make writer
 
+    Writer writer(outputData);
+    writer.writeToCSV(OUTPUT_FILE_NAME);
     return 0;
 }

@@ -11,6 +11,7 @@
 class Solver {
 private:
     InputData inputData;
+    std::map<int, std::map<Qualification::Id, int>> possibilities;
 
     int calculateRating(Request& req) {
         Staff& s = inputData.getStaff(req.getStaff());
@@ -25,6 +26,7 @@ private:
 
     Result solve(const std::vector<double>& args) {
         InputData input = inputData;
+        auto possible = possibilities;
         OutputData output;
         evaluateRequests(input, output, args);
         fullFill(output, args);
@@ -96,8 +98,8 @@ private:
                 // check if it will ne deficit. If it will be, than all is bad.
                 Month& m = inputData.getMonth(req.getMonth());
                 Staff& s = inputData.getStaff(req.getStaffId());
-                Qualification& q = input.getQualification(s.)
-                int& akjsfunsadhjansakdjnsa = m.hoursNeed()
+                Qualification& q = input.getQualification(s.qualifications.front());
+                int& needHours = m.hoursNeed[q.name];
 
                 // do some changes
 
@@ -119,7 +121,9 @@ private:
 
 public:
 
-    Solver(InputData data) : inputData(std::move(data)) {}
+    Solver(InputData data) : inputData(std::move(data)) {
+        for (auto x : inputData.)
+    }
 
 //    OutputData get() {
 //        std::vector<double> args(8, 1); // начальные данные

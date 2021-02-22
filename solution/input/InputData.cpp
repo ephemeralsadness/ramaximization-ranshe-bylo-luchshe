@@ -6,6 +6,10 @@ Staff& InputData::getStaff(Staff::Id id) {
     return staff.at(id);
 }
 
+std::map<Staff::Id, Staff>& InputData::getAllStaff() {
+    return staff;
+}
+
 Qualification& InputData::getQualification(const Qualification::Id& id) {
     return qualifications.at(id);
 }

@@ -20,6 +20,7 @@ public:
 
     Month& getMonth(int monthNumber);
     Staff& getStaff(Staff::Id id);
+    std::map<Staff::Id, Staff>& getAllStaff();
     Qualification& getQualification(const Qualification::Id& id);
     std::vector<Request>& getRequests();
     int GetRestYear() const; //возвращает параметр REST_YEAR

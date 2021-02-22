@@ -79,8 +79,10 @@ void Reader::readMaxFly() {
 
 void Reader::readMaxStarts() {
     Reader::StringTable table = CSVMap["max_starts"];
+    Reader::StringTable idTable = CSVMap["personal_levels"];
     for (int i = 0; i < table.size(); ++i) {
-        staff[i].maxStart = stoi(table[i][0]);
+        Staff::Id id = stoi(idTable[i][0]);
+        staff[id].maxStart = stoi(table[i][0]);
     }
 };
 

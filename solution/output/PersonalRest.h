@@ -1,5 +1,6 @@
 #pragma once
 
+
 class PersonalRest {
 public:
     int personalId;

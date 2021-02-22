@@ -121,7 +121,9 @@ private:
         auto& cs = constants::REST_CONSTANTS;
 
         // TODO make MIN_START AND MAX_START work
-        for (auto& [id, human] : inputData.getAllStaff()) {
+        for (auto& pp : inputData.getAllStaff()) {
+            auto id = pp.first;
+            auto human = pp.second;
             auto& v = staffIdToRequests[id];
 
             if (human.qualifications.empty()) {
@@ -207,7 +209,9 @@ private:
 public:
 
     Solver(InputData data) : inputData(std::move(data)) {
-        for (auto& [x, y] : inputData.getAllStaff()) {
+        for (auto& pp : inputData.getAllStaff()) {
+            auto x = pp.first;
+            auto y = pp.second;
             for (int i = 0; i < 12; ++i) {
                 if (!y.qualifications.empty()) {
                     possibilities[i][y.qualifications.front()] += y.maxHours;

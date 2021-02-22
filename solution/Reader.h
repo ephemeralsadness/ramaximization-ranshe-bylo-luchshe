@@ -17,6 +17,8 @@ private:
     std::map<Qualification::Id, Qualification> qualifications;
     std::vector<Request> requests;
 
+    std::map<std::string, StringTable> CSVMap;
+
     static std::map<std::string, StringTable> makeCSVMap(const std::string& folderName);
     static StringTable readFromCSV(const std::string& filename);
 

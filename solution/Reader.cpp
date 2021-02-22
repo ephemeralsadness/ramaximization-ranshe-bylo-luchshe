@@ -41,3 +41,7 @@ Reader::StringTable Reader::readFromCSV(const string& filename) {
 
     return data;
 }
+
+InputData Reader::readInputData(const std::string& folderName) {
+
+}

@@ -12,7 +12,7 @@ public:
         : isTop(isTop_), maxVacationSize(maxVacationSize_), hoursNeed(move(hoursNeed_)) { }
 
     void addRequest(Request request) {
-        staffRequests[request.getStaff()]
+        staffRequests[request.getStaff()];
     }
 
 private:

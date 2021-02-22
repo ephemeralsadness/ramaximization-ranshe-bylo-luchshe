@@ -4,11 +4,9 @@
 
 class Request {
 public:
-    Request();
-    calculateRating();
-
-
-
+    Request() {}
+    double calculateRating() {}
+    Staff::Id getStaff() {}
 private:
     Staff::Id staffId;
     int priority;

@@ -8,6 +8,11 @@
 
 class OutputData {
 public:
+    OutputData() {
+        qualDeficits = std::vector<std::vector<int>>(12, std::vector<int>(10));
+        workingHours = std::vector<std::vector<int>>(12, std::vector<int>(10));
+    }
+
     std::vector<PersonalRest> personalRests;
     std::vector<TotalRest> totalRests;
 

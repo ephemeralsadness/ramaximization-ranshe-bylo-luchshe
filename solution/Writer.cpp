@@ -7,7 +7,7 @@
 
 void Writer::writeToCSV(OutputData outputData, std::string outPutFolder) {
     std::ofstream personalRests, totalRests, qualDeficits, workingHours, monthResults;
-    std::string path = outPutFolder;
+    std::string path = outPutFolder + "/";
     personalRests.open(path+"personalRests.csv");
     totalRests.open(path+"totalRests.csv");
     qualDeficits.open(path+"qualDeficits.csv");
@@ -31,9 +31,9 @@ void Writer::writeToCSV(OutputData outputData, std::string outPutFolder) {
     if(qualDeficits.is_open()){
         qualDeficits<<"Qualification,1,2,3,4,5,6,7,8,9,10,11,12\n";
         for(int i =0; i < 10;i++){
-            qualDeficits<<"Q"<<i+1;
-            for(int j = 0; j<12;j++){
-                qualDeficits<<','<<outputData.qualDeficits[j][i];
+            qualDeficits << "Q" << i+1;
+            for(int j = 0; j < 12;j++){
+                qualDeficits << ',' << outputData.qualDeficits[j][i];
             }
             qualDeficits<<'\n';
         }

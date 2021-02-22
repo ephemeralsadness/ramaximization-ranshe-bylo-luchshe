@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <numeric>
 #include <algorithm>
 #include "input/InputData.h"
 #include "output/OutputData.h"
@@ -30,6 +31,52 @@ private:
         evaluateRequests(input, possible, output);
         fullFill(possible, output);
 
+        for (auto& pp : staffIdToRequests) {
+            auto& id = pp.first;
+            auto& vv = pp.second;
+
+            int sm = 0;
+            for (auto x : vv) {
+                sm += x->getHours();
+            }
+
+            int need = input.getStaff(id).maxHours * 2;
+
+            output.totalRests.emplace_back(id, vv.size(), sm, std::max(need - sm, 0));
+        }
+
+        for (int i = 0; i < 12; ++i) {
+            Month& m = input.getMonth(i);
+            for (auto&& pp : m.hoursNeed) {
+                auto& q = pp.first;
+                auto& am = pp.second;
+
+                auto& sth = output.qualDeficits[i][std::stoi(q.substr(1)) - 1];
+                auto& ss = possible[i][q];
+
+                output.qualDeficits[i][std::stoi(q.substr(1)) - 1] = std::max(0, am - possible[i][q]);
+                output.workingHours[i][std::stoi(q.substr(1)) - 1] = possible[i][q];
+            }
+        }
+
+        std::vector<int> othours(12, 0);
+        std::vector<int> otamount(12, 0);
+
+        for (auto& pp : staffIdToRequests) {
+            auto& vv = pp.second;
+            for (auto x : vv) {
+                othours[x->getMonth()] += x->getHours();
+                otamount[x->getMonth()] += 1;
+            }
+        }
+
+        for (int i = 0; i < 12; ++i) {
+            Month& m = input.getMonth(i);
+            int potr = std::accumulate(output.qualDeficits[i].begin(), output.qualDeficits[i].end(), 0);
+            int smwo = std::accumulate(output.workingHours[i].begin(), output.workingHours[i].end(), 0);
+            output.monthResults.emplace_back(potr, smwo, othours[i], otamount[i]);
+        }
+
         return output;
     }
 
@@ -45,8 +92,11 @@ private:
         });
 
         auto& cs = constants::REST_CONSTANTS;
+        std::vector<char> accepted(requests.size());
 
-        for (auto& req : requests) {
+        for (int i = 0; i < (int)requests.size(); ++i) {
+            accepted[i] = false;
+            auto& req = requests[i];
             auto& v = staffIdToRequests[req.getStaffId()];
 
             if (v.size() >= cs["TOTAL_RESTS"]) continue;
@@ -109,8 +159,13 @@ private:
                 }
             }
 
+            accepted[i] = true;
             v.push_back(&req);
             std::sort(v.begin(), v.end(), comp_req_pointers);
+        }
+
+        for (int i = 0; i < (int)requests.size(); ++i) {
+            output.personalRests.emplace_back(requests[i].staffId, requests[i].getMonth(), requests[i].getHours(), accepted[i]);
         }
     }
 
@@ -127,7 +182,7 @@ private:
             auto& v = staffIdToRequests[id];
 
             if (human.qualifications.empty()) {
-                // TODO make rest to people who does not have qualifications
+                // (rand() % 12)
                 continue;
             }
 

@@ -1,5 +1,4 @@
 #pragma once
-
 #include <map>
 #include <vector>
 #include "../input/Qualification.h"
@@ -8,6 +7,7 @@
 #include "MonthResult.h"
 
 class OutputData {
+public:
     std::vector<PersonalRest> personalRests;
     std::vector<TotalRest> totalRests;
 

@@ -25,8 +25,8 @@ private:
     void readMonths();
     void readParams();
     void readPersonalLevels();
-    void readQualified();
     void readQualLevels();
+    void readQualified();
     void readQuals();
     void readRequiredPersonal();
     void readRestPrior();

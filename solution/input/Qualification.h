@@ -7,8 +7,10 @@
 
 class Qualification {
 public:
+    Qualification() {};
+
     using Id = std::string;
-private:
+
     Id name;
     int level;
     int priority;

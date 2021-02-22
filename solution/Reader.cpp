@@ -65,32 +65,63 @@ InputData Reader::getInputData(const std::string& folderName) {
 
 void Reader::readMaxFly() {
     Reader::StringTable table = readFromCSV("max_fly");
-
+    Reader::StringTable idTable = readFromCSV("personal_levels");
+    for (int i = 0; i < table.size(); ++i) {
+        Staff::Id id = stoi(idTable[i][0]);
+        staff[id] = Staff();
+        staff[id].maxHours = stoi(table[i][0]);
+    }
 }
 
 void Reader::readMaxStarts() {
     Reader::StringTable table = readFromCSV("max_starts");
+    for (int i = 0; i < table.size(); ++i) {
+        staff[i].maxStart = stoi(table[i][0]);
+    }
 };
 
 void Reader::readMonths() {
     Reader::StringTable table = readFromCSV("months");
+    for (int i = 0; i < table.size(); ++i) {
+        int month = stoi(table[i][0]) - 1;
+        int isTop = stoi(table[i][1]);
+        int maxRest = stoi(table[i][2]);
+        year[month].isTop = isTop;
+        year[month].maxVacationSize = maxRest;
+    }
 };
 
 void Reader::readParams() {
     Reader::StringTable table = readFromCSV("params");
+    for (int i = 0; i < table.size(); ++i) {
+        constants::REST_CONSTANTS[table[i][0]] = stoi(table[i][1]);
+    }
 };
 
 void Reader::readPersonalLevels() {
     Reader::StringTable table = readFromCSV("personal_levels");
+    for (int i = 0; i < table.size(); ++i) {
+        Staff::Id id = stoi(table[i][0]);
+        int level = stoi(table[i][1]);
+        staff[id].level = level;
+    }
+};
+
+void Reader::readQualLevels() {
+    Reader::StringTable table = readFromCSV("qual_levels");
+    Reader::StringTable idTable = readFromCSV("quals");
+    for (int i = 0; i < table.size(); ++i) {
+        Qualification::Id id = idTable[i][0];
+        qualifications[id] = Qualification();
+        qualifications[id].name = id;
+        qualifications[id].level = stoi(table[i][0]);
+    }
 };
 
 void Reader::readQualified() {
     Reader::StringTable table = readFromCSV("qualified");
 };
 
-void Reader::readQualLevels() {
-    Reader::StringTable table = readFromCSV("qual_levels");
-};
 
 void Reader::readQuals() {
     Reader::StringTable table = readFromCSV("quals");

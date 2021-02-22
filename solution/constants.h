@@ -21,7 +21,7 @@ namespace constants {
             "starts"
     };
 
-    const std::vector<std::string> REST_CONSTANTS = {
+    const std::vector<std::string> REST_CONSTANT_NAMES = {
             "REST_YEAR",
             "MIN_REST_SIZE",
             "MIN_REST_LAG",
@@ -30,9 +30,11 @@ namespace constants {
             "NOPRIOR_RESTS",
             "REST_HIGH",
             "REST_LOW",
-            "N_MONTHS",
-            "N_QUALS"
+            "nMonths",
+            "nQuals"
     };
+
+    std::map<std::string, int> REST_CONSTANTS;
 
     const std::string CSV = ".csv";
 

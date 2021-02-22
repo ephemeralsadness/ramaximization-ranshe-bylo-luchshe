@@ -4,15 +4,16 @@
 #include <algorithm>
 #include "input/InputData.h"
 #include "output/OutputData.h"
-
-int calculateRating(InputData& input, Request& req) {
-    Staff& s = input.getStaff(req.getStaff());
-    return (4 - req.getPriority()) * (MAX_PERSONAL_LEVEL + 1) + s.getLevel();
-}
+#include "constants.h"
 
 class Solver {
 private:
     InputData inputData;
+
+    int calculateRating(Request& req) {
+        Staff& s = inputData.getStaff(req.getStaff());
+        return (4 - req.getPriority()) * (MAX_PERSONAL_LEVEL + 1) + s.getLevel();
+    }
 
     struct Result {
         double sumRating,
@@ -32,14 +33,26 @@ private:
     void evaluateRequests(InputData& input, OutputData& output, const std::vector<double>& args) {
         std::vector<Request> requests = input.getRequests();
         std::sort(requests.begin(), requests.end(), [this](Request& lhs, Request& rhs) {
-            return calculateRating(this->inputData, lhs) > calculateRating(this->inputData, rhs);
+            return this->calculateRating(lhs) > this->calculateRating(rhs);
         });
 
-        for
+        auto& cs = constants::REST_CONSTANTS;
+        std::map<Staff::Id, std::vector<Request*>> staffIdToRequests;
+
+        for (auto& req : requests) {
+            auto good = true;
+            auto& v = staffIdToRequests[req.getStaff()];
+
+            if (v.size() >= cs["TOTAL_RESTS"]) continue;
+            if (req.getHours() < )
+
+        }
+
+
     }
 
     void fullFill(OutputData& data, const std::vector<double>& args) {
-        //
+
     }
 
     Result getCost(const OutputData& data) {

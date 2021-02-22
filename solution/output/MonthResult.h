@@ -1,4 +1,5 @@
 class MonthResult {
+public:
     int needHours;
     int workHours;
     int numberOfRest;

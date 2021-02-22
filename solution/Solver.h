@@ -9,6 +9,10 @@
 
 
 class Solver {
+public:
+    OutputData get() {
+        return solve();
+    }
 private:
     InputData inputData;
     std::map<int, std::map<Qualification::Id, int>> possibilities;
@@ -19,21 +23,17 @@ private:
         return (4 - req.getPriority()) * (constants::MAX_PERSONAL_LEVEL + 1) + s.getLevel();
     }
 
-    struct Result {
-        double sumRating,
-               chillTime,
-               deficit;
-    };
-
-    void solve(const std::vector<double>& args) {
+    OutputData solve() {
         InputData input = inputData;
         auto possible = possibilities;
         OutputData output;
-        evaluateRequests(input, possible, output, args);
-        fullFill(possible, output, args);
+        evaluateRequests(input, possible, output);
+        fullFill(possible, output);
+
+        return output;
     }
 
-    void evaluateRequests(InputData& input, std::map<int, std::map<Qualification::Id, int>>& possible, OutputData& output, const std::vector<double>& args) {
+    void evaluateRequests(InputData& input, std::map<int, std::map<Qualification::Id, int>>& possible, OutputData& output) {
         staffIdToRequests.clear();
         auto comp_req_pointers = [](Request* lhs, Request* rhs) -> bool {
             return lhs->getMonth() < rhs->getMonth();
@@ -114,7 +114,7 @@ private:
         }
     }
 
-    void fullFill(std::map<int, std::map<Qualification::Id, int>>& possible, OutputData& data, const std::vector<double>& args) {
+    void fullFill(std::map<int, std::map<Qualification::Id, int>>& possible, OutputData& data) {
         auto comp_req_pointers = [](Request* lhs, Request* rhs) -> bool {
             return lhs->getMonth() < rhs->getMonth();
         };

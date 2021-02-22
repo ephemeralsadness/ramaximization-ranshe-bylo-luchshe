@@ -1,3 +1,5 @@
+#pragma once
+
 class TotalRest {
 public:
     const int personalId;

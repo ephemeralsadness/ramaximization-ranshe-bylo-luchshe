@@ -2,42 +2,17 @@
 
 #include <vector>
 #include <string>
-#include "output/OutputData.h"
-#include "input/InputData.h"
+#include <map>
 
-namespace constants {
+struct constants {
+    static const std::vector<std::string> CSV_TABLE_NAMES;
 
-    const std::vector<std::string> CSV_TABLE_NAMES = {
-            "max_fly",
-            "max_starts",
-            "months",
-            "params",
-            "personal_levels",
-            "quals",
-            "qual_levels",
-            "qualified",
-            "required_personal",
-            "rest_prior",
-            "rest_req",
-            "starts"
-    };
+    static const std::vector<std::string> REST_CONSTANT_NAMES;
 
-    const std::vector<std::string> REST_CONSTANT_NAMES = {
-            "REST_YEAR",
-            "MIN_REST_SIZE",
-            "MIN_REST_LAG",
-            "TOTAL_RESTS",
-            "PRIOR_RESTS",
-            "NOPRIOR_RESTS",
-            "REST_HIGH",
-            "REST_LOW",
-            "nMonths",
-            "nQuals"
-    };
+    static std::map<std::string, int> REST_CONSTANTS;
 
-    std::map<std::string, int> REST_CONSTANTS;
+    static const std::string CSV;
 
-    const std::string CSV = ".csv";
+    static int MAX_PERSONAL_LEVEL;
+};
 
-    int MAX_PERSONAL_LEVEL = 0;
-}

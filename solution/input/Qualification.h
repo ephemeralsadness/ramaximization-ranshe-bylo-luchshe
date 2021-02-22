@@ -2,9 +2,6 @@
 
 #include <string>
 
-
-// TODO сделать компаратор объектов Qualification
-
 class Qualification {
 public:
     Qualification() {};

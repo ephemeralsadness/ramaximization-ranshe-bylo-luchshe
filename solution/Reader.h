@@ -32,5 +32,5 @@ private:
     void readRestPrior();
     void rest_req();
     void starts();
-    void nothing();
+    void nothing() {}
 };

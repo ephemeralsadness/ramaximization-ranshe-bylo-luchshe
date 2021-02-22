@@ -128,12 +128,10 @@ private:
 
             if (human.qualifications.empty()) {
                 // TODO make rest to people who does not have qualifications
+                continue;
             }
 
             for (int i = 0; i < 12; ++i) {
-                // TODO simulate if we have a request for month = i and hours = min(max_fly, сколько можно)
-
-                int am = possible[i][human.qualifications.front()];
                 Request req(id, 3, i, std::min(inputData.getStaff(id).maxHours,
                         std::max(possible[i][human.qualifications.front()] - inputData.getMonth(i).hoursNeed[human.qualifications.front()], 0)));
 

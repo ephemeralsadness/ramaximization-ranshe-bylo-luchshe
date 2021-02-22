@@ -125,7 +125,7 @@ void Reader::readQualLevels() {
     Reader::StringTable idTable = readFromCSV("quals");
     for (int i = 0; i < table.size(); ++i) {
         Qualification::Id id = idTable[i][0];
-        qualifications[id].level = stoi(table[i][0]);
+        qualifications[id].level = stoi( table[i][0]);
     }
 };
 

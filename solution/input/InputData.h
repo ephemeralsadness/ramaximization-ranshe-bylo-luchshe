@@ -12,7 +12,7 @@
 class InputData {
 public:
     InputData(std::vector<Month> year_, std::map<Staff::Id, Staff> staff_,
-              std::map<Qualification::Id, Qualification> qualifications_, std::vector<Request> requests_)s
+              std::map<Qualification::Id, Qualification> qualifications_, std::vector<Request> requests_)
               : year(move(year_))
               , staff(move(staff_))
               , qualifications(move(qualifications_))

@@ -122,7 +122,11 @@ private:
 public:
 
     Solver(InputData data) : inputData(std::move(data)) {
-        for (auto x : inputData.)
+        for (auto& [x, y] : inputData.getAllStaff()) {
+            for (int i = 0; i < 12; ++i) {
+                possibilities[i][y.qualifications.front()]
+            }
+        }
     }
 
 //    OutputData get() {

@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ Reader::StringTable Reader::readFromCSV(const std::string &filename) {
         }
     }
 
-    if (!data.empty() && data.back().empty())
+    while (!data.empty() && (data.back().empty() || data.back().back().empty()))
         data.pop_back();
     data.shrink_to_fit();
 
@@ -69,6 +70,7 @@ void Reader::readMaxFly() {
     Reader::StringTable idTable = CSVMap["personal_levels"];
 
     for (int i = 0; i < table.size(); ++i) {
+//        std::cout << i << ' ' << idTable[i][0] << ' ' << table[i][0] << std::endl;
         Staff::Id id = stoi(idTable[i][0]);
         staff[id] = Staff();
         staff[id].maxHours = stoi(table[i][0]);
